@@ -86,6 +86,11 @@
             padding: 10px 20px;
         }
 
+        .jumbotron button {
+            border-radius: 20px;
+        }
+        
+
         /* 设置主页标题按钮鼠标悬停样式 */
         .jumbotron button:hover {
             background-color: white;
