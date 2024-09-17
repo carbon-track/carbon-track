@@ -79,11 +79,16 @@
 
         /* 设置主页标题按钮样式 */
         .jumbotron button {
-            background-color: #ffbe16;
+                background-color: #ffbe16;
             border: none;
             color: black;
             font-weight: bold;
             padding: 10px 20px;
+            width: 60px; /* 确保宽度和高度相等 */
+            height: 60px; /* 确保宽度和高度相等 */
+            border-radius: 50%; /* 使按钮变为圆形 */
+            text-align: center; /* 居中文字 */
+            line-height: 40px; /* 调整文本垂直居中 */
         }
      
 
