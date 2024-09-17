@@ -80,16 +80,12 @@
         /* 设置主页标题按钮样式 */
         .jumbotron button {
             background-color: #ffbe16;
-            border: white;
+            border: none;
             color: black;
             font-weight: bold;
             padding: 10px 20px;
         }
-
-        .jumbotron button {
-            border-radius: 20px;
-        }
-        
+     
 
         /* 设置主页标题按钮鼠标悬停样式 */
         .jumbotron button:hover {
