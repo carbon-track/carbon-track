@@ -80,7 +80,7 @@
         /* 设置主页标题按钮样式 */
         .jumbotron button {
             background-color: #ffbe16;
-            border: none;
+            border: white;
             color: black;
             font-weight: bold;
             padding: 10px 20px;
