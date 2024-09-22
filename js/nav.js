@@ -265,14 +265,14 @@ function registerUser() {
             if (response.success) {
                 // 注册成功
                 $('#registerModal').modal('hide'); // 关闭模态框
-                alert('注册成功！');
+                alert('注册成功！Register success!');
             } else {
                 // 注册失败，显示错误信息
-                $('#registerError').show().text('注册失败: ' + response.error);
+                $('#registerError').show().text('连接不稳定，请尝试直接登录! Connection unstable, please try to sign in directly!');
             }
         },
         error: function() {
-            alert('注册请求失败，请稍后再试。');
+            alert('注册请求失败，请稍后再试。Register request failed, please try later.');
             $('#refreshAlert').show();
         }
     });
