@@ -16,12 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['regu
     $verificationCode = filter_input(INPUT_POST, 'verificationCode', FILTER_SANITIZE_NUMBER_INT);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(['success' => false, 'error' => '无效的邮箱地址。']);
+        echo json_encode(['success' => false, 'error' => 'Invalid Email address.']);
         exit;
     }
 
     if ($verificationCode != $_SESSION['verification_code']||empty($verificationCode)) {
-        echo json_encode(['success' => false, 'error' => '验证码错误。']);
+        echo json_encode(['success' => false, 'error' => 'Incorrect Verification Code.']);
         exit;
     }
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['regu
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode(['success' => false, 'error' => '用户名已被注册。']);
+        echo json_encode(['success' => false, 'error' => 'Username has been registered.']);
         exit;
     }
 
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['regu
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode(['success' => false, 'error' => '邮箱已被注册。']);
+        echo json_encode(['success' => false, 'error' => 'Email has been registered.']);
         exit;
     }
 
