@@ -229,7 +229,7 @@
   
 <!--Start From Chat主页碳核算悬浮按钮-->
 <button id="calculateButton" class="btn btn-primary floating-button">
-   <img src="/img/recordFloatingButton.png" alt="RECORD" style="width: 100px; height: 50px;">
+    < img src="path/to/your/image.png" alt="RECORD" style="width: 100px; height: 50px; border-radius: 50%;">
 </button>
 
 <script>
@@ -239,11 +239,14 @@
     // 修改按钮的背景颜色为透明
     button.style.backgroundColor = 'transparent';  // 设置背景颜色为透明
     
-    // 移除按钮的边框圆角，以适配图像
-    button.style.borderRadius = '0';  // 不需要圆角边框
+    // 设置边框为圆角
+    button.style.borderRadius = '50%';  // 圆形边框
     
     // 去除按钮的内边距以适配图像
     button.style.padding = '0';
+    
+    // 去掉按钮的蓝色聚焦框
+    button.style.outline = 'none';  // 去除聚焦时的默认蓝色外框
     
     // 删除文本颜色设置，因为不再需要
     // button.style.color = 'white';
