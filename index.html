@@ -422,12 +422,12 @@
 <script>
   // 页面加载时检查登录状态
   $(document).ready(function () {
-    var loggedIn = sessionStorage.getItem('loggedIn')
-    var expiration = sessionStorage.getItem('expiration')
+    var loggedIn = localStorage.getItem('loggedIn')
+    var expiration = localStorage.getItem('expiration')
     var now = new Date()
 
     if (loggedIn && expiration && now.getTime() < expiration) {
-      var username = sessionStorage.getItem('username')
+      var username = localStorage.getItem('username')
       updateLoginStatus()
       $('[data-target="#loginModal"]').hide()
       $('[data-target="#registerModal"]').hide()
