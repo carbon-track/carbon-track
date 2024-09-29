@@ -240,9 +240,14 @@
           Join Us
         </button>-->
         
-    <button type="button" class="btn btn-success float-right" onclick="window.location.href='mailto:carbontrack666@gmail.com'">
-    Join Us
-</button>
+ <button id="emailButton">Send Us an Email</button>
+
+<script>
+    document.getElementById('emailButton').addEventListener('click', function () {
+        window.location.href = 'mailto:carbontrack666@gmail.com';
+    });
+</script>
+
 
       </div>
     </div>
