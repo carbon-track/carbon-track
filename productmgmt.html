@@ -242,7 +242,7 @@
 </div>
 <script>
   $(document).ready(function () {
-    var token = sessionStorage.getItem('token') // Assume the user's token is stored in sessionStorage
+    var token = localStorage.getItem('token') // Assume the user's token is stored in localStorage
     if (!token) {
       alert('非法访问！')
       window.location.href = 'index.html' // Redirect to login page if token is not present
@@ -252,7 +252,7 @@
   })
 
   function verifyAdmin() {
-    var token = sessionStorage.getItem('token')
+    var token = localStorage.getItem('token')
     $.ajax({
       type: 'POST',
       data: { token: token },
@@ -267,7 +267,7 @@
             var description = $('#addDescription').val()
             var price = $('#addPrice').val()
             var stock = $('#addStock').val()
-            var token = sessionStorage.getItem('token')
+            var token = localStorage.getItem('token')
             $.ajax({
               type: 'POST',
               url: 'add_product.php',
@@ -303,7 +303,7 @@
     var name = $('#updateName').val()
     var description = $('#updateDescription').val()
     var price = $('#updatePrice').val()
-    var token = sessionStorage.getItem('token')
+    var token = localStorage.getItem('token')
     $.ajax({
       type: 'POST',
       url: 'update_product.php',
@@ -325,7 +325,7 @@
 
   function deleteProduct() {
     var productId = $('#updateProductId').val()
-    var token = sessionStorage.getItem('token')
+    var token = localStorage.getItem('token')
     $.ajax({
       type: 'POST',
       url: 'delete_product.php',
@@ -382,9 +382,9 @@
   }
 </script>
 <script>function logout() {
-  sessionStorage.removeItem('loggedIn')
-  sessionStorage.removeItem('username')
-  sessionStorage.removeItem('expiration')
+  localStorage.removeItem('loggedIn')
+  localStorage.removeItem('username')
+  localStorage.removeItem('expiration')
   // 更新UI为未登录状态
   $('#userStatus').text('')
   $('#logoutButton').hide()
