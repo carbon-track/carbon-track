@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/css/index.css">
   <script>
     $(document).ready(function () {
-      var token = sessionStorage.getItem('token')
+      var token = localStorage.getItem('token')
       if (token) {
       } else {
         $('#userPoints').text('未登录')
@@ -27,11 +27,11 @@
       $('#dataInput, #activity').on('input change', calculateAndDisplayReduction)
       $('#carbonForm').submit(function (e) {
         e.preventDefault()
-        var uid = sessionStorage.getItem('id')
+        var uid = localStorage.getItem('id')
         var formData = new FormData(this)
         formData.append('activity', $('#activity').val())
         formData.append('oridata', $('#dataInput').val())
-        formData.append('token', sessionStorage.getItem('token'))
+        formData.append('token', localStorage.getItem('token'))
         formData.append('id', uid)
 
         $.ajax({
@@ -367,9 +367,9 @@
 </form>
 <script>
   function logout() {
-    sessionStorage.removeItem('loggedIn')
-    sessionStorage.removeItem('username')
-    sessionStorage.removeItem('expiration')
+    localStorage.removeItem('loggedIn')
+    localStorage.removeItem('username')
+    localStorage.removeItem('expiration')
     // 更新UI为未登录状态
     $('#userStatus').text('')
     $('#logoutButton').hide()
