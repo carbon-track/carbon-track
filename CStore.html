@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/index.css">
   <script>
     $(document).ready(function () {
-      var token = sessionStorage.getItem('token')
+      var token = localStorage.getItem('token')
       if (token) {
       } else {
         $('#userPoints').text('未登录')
@@ -28,7 +28,7 @@
       // 兑换商品
       $('#productsList').on('click', '.exchange-btn', function () {
         var productId = $(this).data('id')
-        var token = sessionStorage.getItem('token')
+        var token = localStorage.getItem('token')
         exchangeProduct(productId, token)
       })
     })
@@ -55,7 +55,7 @@
     }
 
     function fetchUserPoints() {
-      var token = sessionStorage.getItem('token')
+      var token = localStorage.getItem('token')
       $.ajax({
         type: 'POST',
         url: 'get_user_points.php',
