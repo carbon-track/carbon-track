@@ -113,7 +113,7 @@
   $(document).ready(function () {
     fetchTransactions()
   })
-  var token = localStorage.getItem('token')
+  var token = sessionStorage.getItem('token')
   if (token) {
   } else {
     $('#email').text('未登录')
@@ -122,13 +122,13 @@
   }
 
   function fetchTransactions() {
-    var token = localStorage.getItem('token')
+    var token = sessionStorage.getItem('token')
     if (!token) {
       alert('请先登录。')
       window.location.href = 'index.html'
       return // 如果没有token，停止执行
     }
-    $('#email').text(localStorage.getItem('email'))
+    $('#email').text(sessionStorage.getItem('email'))
     $('#loading').show() // 显示加载动画
     $.ajax({
       type: 'POST', // 确保请求类型与PHP脚本接收的一致
