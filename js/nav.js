@@ -33,8 +33,8 @@ $(document).ready(function() {
     };
 
     document.body.appendChild(googleTranslateScript);*/
-  var loggedIn = localStorage.getItem('loggedIn');
-  var expiration = localStorage.getItem('expiration');
+  var loggedIn = sessionStorage.getItem('loggedIn');
+  var expiration = sessionStorage.getItem('expiration');
   var now = new Date();
 
   if (loggedIn && expiration && now.getTime() < expiration) {
@@ -46,7 +46,7 @@ $(document).ready(function() {
     // 设置按钮颜色
     logoutButton.style.color = 'rgba(255, 255, 255, .5)';
     logoutButton.style.border = '1px solid rgba(255, 255, 255, .5)';
-    var username = localStorage.getItem('username');
+    var username = sessionStorage.getItem('username');
     updateLoginStatus();
             checkUnreadMessages();
         setInterval(checkUnreadMessages(), 30);
@@ -92,12 +92,12 @@ $('nav .fas.fa-envelope').css('color', 'rgba(255, 255, 255, .5)');
                     // 登录成功
                     var now = new Date();
                     var expiration = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // 设置7天后的时间
-                    localStorage.setItem('loggedIn', true); // 存储登录状态
-                    localStorage.setItem('username', response.real_username); // 存储用户名
-                    localStorage.setItem('expiration', expiration.getTime()); // 存储过期时间戳
-                    localStorage.setItem('email', response.email); // 存储email
-                    localStorage.setItem('token', response.token);
-                    localStorage.setItem('id', response.id);
+                    sessionStorage.setItem('loggedIn', true); // 存储登录状态
+                    sessionStorage.setItem('username', response.real_username); // 存储用户名
+                    sessionStorage.setItem('expiration', expiration.getTime()); // 存储过期时间戳
+                    sessionStorage.setItem('email', response.email); // 存储email
+                    sessionStorage.setItem('token', response.token);
+                    sessionStorage.setItem('id', response.id);
                     $('[data-target="#loginModal"]').hide();
                     $('[data-target="#registerModal"]').hide();
                     var logoutButton = document.getElementById('logoutButton');
@@ -170,8 +170,8 @@ function googleTranslateElementInit() {
 
 function checkUnreadMessages() {
     
-    var token = localStorage.getItem('token');
-    var id = localStorage.getItem('id');
+    var token = sessionStorage.getItem('token');
+    var id = sessionStorage.getItem('id');
     $.ajax({
             type: 'POST',
             url: 'chkmsg.php',
@@ -197,8 +197,8 @@ function checkUnreadMessages() {
 
 // 检查登录状态
 function checkLoginStatus() {
-    var loggedIn = localStorage.getItem('loggedIn');
-    var expiration = localStorage.getItem('expiration');
+    var loggedIn = sessionStorage.getItem('loggedIn');
+    var expiration = sessionStorage.getItem('expiration');
     var now = new Date();
 
     if (loggedIn && expiration && now.getTime() < expiration) {
@@ -210,12 +210,12 @@ function checkLoginStatus() {
 
 // 注销函数
 function logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     updateLoginStatus(); // 更新UI为未登录状态
 
 }
 function updateLoginStatus() {
-    var username = localStorage.getItem('username');
+    var username = sessionStorage.getItem('username');
     if (username) {
         // 根据您的页面结构，这里可能需要调整
         $('#userStatus').text('Welcome, ' + username);
@@ -296,9 +296,9 @@ function sendVerificationCode() {
         alert('请填写所有必填信息后再发送验证码。');
         return; // 终止函数执行
     }
-    // 记录发送时间到localStorage
+    // 记录发送时间到sessionStorage
     const now = Date.now();
-    localStorage.setItem('lastSentTime', now.toString());
+    sessionStorage.setItem('lastSentTime', now.toString());
 
     // 获取用户输入的邮箱并发送验证码...
     var email = $('#email').val();
@@ -313,7 +313,7 @@ function sendVerificationCode() {
                     $('#emailHelp').show();
                     // 禁用发送按钮，60秒后再启用
                     const now = Date.now();
-                    localStorage.setItem('lastSentTime', now.toString());
+                    sessionStorage.setItem('lastSentTime', now.toString());
                     $('#sendVerificationCode').prop('disabled', true);
                     updateButtonForRemainingTime();
                     
@@ -334,7 +334,7 @@ function sendVerificationCode() {
 
 function updateButtonForRemainingTime() {
     const now = Date.now();
-    const lastSentTime = localStorage.getItem('lastSentTime') ? parseInt(localStorage.getItem('lastSentTime'), 10) : 0;
+    const lastSentTime = sessionStorage.getItem('lastSentTime') ? parseInt(sessionStorage.getItem('lastSentTime'), 10) : 0;
     let remainingTime = 60000 - (now - lastSentTime);
 
     remainingTime = Math.max(0, remainingTime);
@@ -352,8 +352,8 @@ function updateButtonForRemainingTime() {
 // 获取消息
 function fetchMessages() {
     return new Promise((resolve, reject) => {
-        var receiverId = localStorage.getItem('id');
-        var token = localStorage.getItem('token');
+        var receiverId = sessionStorage.getItem('id');
+        var token = sessionStorage.getItem('token');
         $.ajax({
             type: 'POST',
             url: 'getmsg.php',
@@ -374,7 +374,7 @@ function fetchMessages() {
 
 function buildConversationsList(data) {
     var conversations = {};
-    var userId = localStorage.getItem('id'); // 假设当前用户ID已存储在localStorage
+    var userId = sessionStorage.getItem('id'); // 假设当前用户ID已存储在sessionStorage
 
     data.messages.forEach(function(message) {
         // 对话标识可以是两个用户ID的组合，这里简单地将它们连接起来
@@ -410,14 +410,14 @@ Object.values(conversations).forEach(function(conversation) {
 
 
 function displayMessages(messages,sender) {
-    localStorage.setItem('currentChatPartnerId', sender); // 将当前聊天伙伴的sender_id保存在localStorage中
+    sessionStorage.setItem('currentChatPartnerId', sender); // 将当前聊天伙伴的sender_id保存在sessionStorage中
     const messagesContainer = document.getElementById('messageList');
     messagesContainer.innerHTML = ''; // 清空现有消息
 
     messages.forEach((message, index) => {
         const messageBubble = document.createElement('div');
         messageBubble.classList.add('message-bubble');
-var currentUserId = localStorage.getItem('id');
+var currentUserId = sessionStorage.getItem('id');
 
 // 根据消息发送者和接收者，调整气泡样式
 if (message.sender_id === currentUserId) {
@@ -450,10 +450,10 @@ if (message.sender_id === currentUserId) {
     });
 }
 function sendMessage() {
-    var receiverId = localStorage.getItem('currentChatPartnerId');  // 假设你有一个接收者ID的输入字段
+    var receiverId = sessionStorage.getItem('currentChatPartnerId');  // 假设你有一个接收者ID的输入字段
     var messageContent = $('#messageInput').val(); // 获取消息输入框的内容
-    var senderId = localStorage.getItem('id'); // 假设在登录时，你已经将用户ID保存在了localStorage中
-    var token = localStorage.getItem('token'); // 获取保存的token
+    var senderId = sessionStorage.getItem('id'); // 假设在登录时，你已经将用户ID保存在了sessionStorage中
+    var token = sessionStorage.getItem('token'); // 获取保存的token
 
     if (messageContent.trim() === '') {
         alert('消息内容不能为空！');
