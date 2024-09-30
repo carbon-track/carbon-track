@@ -319,7 +319,7 @@
   $(document).ready(function () {
     bindRankingButtons()
     switchRanking('all')
-    var token = localStorage.getItem('token') // 假设用户的 token 存储在 localStorage
+    var token = sessionStorage.getItem('token') // 假设用户的 token 存储在 sessionStorage
     if (token) {
       $.ajax({
         type: 'POST',
@@ -412,7 +412,7 @@
       }
       var state = $('#userStateSelect').val()
       var isNewSchool = $('#userSchoolSelect').val() == 'other'
-      var token = localStorage.getItem('token')
+      var token = sessionStorage.getItem('token')
       // 提交数据到后端
       $.ajax({
         type: 'POST',
@@ -436,7 +436,7 @@
   })
 
   function logout() {
-    localStorage.removeItem('token') // 确保移除正确的 localStorage 项
+    sessionStorage.removeItem('token') // 确保移除正确的 sessionStorage 项
     // 更新UI为未登录状态
     $('#userStatus').text('')
     $('#logoutButton').hide()
@@ -493,8 +493,8 @@
 
 
   function loadSchools() {
-    // 从 localStorage 获取 token
-    var token = localStorage.getItem('token')
+    // 从 sessionStorage 获取 token
+    var token = sessionStorage.getItem('token')
 
     // 向后端发送请求，获取学校列表
     $.ajax({
@@ -518,7 +518,7 @@
 
   // 切换排行榜类型的事件处理函数
   function switchRanking(type) {
-    var token = localStorage.getItem('token')
+    var token = sessionStorage.getItem('token')
     var userLocation = $('#userLocation').text() // 获取用户地区
     var userSchool = $('#userSchool').text() // 获取用户学校
     var data = {
@@ -556,7 +556,7 @@
 
           // 清空现有排行榜
           $('#leaderboard').empty()
-          var currentUsername = localStorage.getItem('username')
+          var currentUsername = sessionStorage.getItem('username')
           // 遍历排行榜数据并添加到表格中
           $.each(response.ranking, function (index, user) {
             var rank = index + 1 // 排名是索引加1
@@ -600,9 +600,9 @@
   }
 
   function logout() {
-    localStorage.removeItem('loggedIn')
-    localStorage.removeItem('username')
-    localStorage.removeItem('expiration')
+    sessionStorage.removeItem('loggedIn')
+    sessionStorage.removeItem('username')
+    sessionStorage.removeItem('expiration')
     // 更新UI为未登录状态
     $('#userStatus').text('')
     $('#logoutButton').hide()
