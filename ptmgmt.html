@@ -411,7 +411,7 @@
   $(document).ready(function () {
     verifyAdmin()
   })
-  var token = localStorage.getItem('token')
+  var token = sessionStorage.getItem('token')
   if (token) {
   } else {
 
@@ -420,7 +420,7 @@
   }
 
   function verifyAdmin() {
-    var token = localStorage.getItem('token')
+    var token = sessionStorage.getItem('token')
     $.ajax({
       type: 'POST',
       data: { token: token },
@@ -442,7 +442,7 @@
   }
 
   function fetchTransactionsForAdmin() {
-    var token = localStorage.getItem('token')
+    var token = sessionStorage.getItem('token')
     $.ajax({
       type: 'POST',
       data: { token: token },
